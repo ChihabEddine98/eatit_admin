@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
+    <color name="colorGrey">#2A2124</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="noirClair">#B74C2F37</color>
+    <color name="overlayBg">#808C7379</color>
+    <color name="btn_color_clair">#F50057</color>
+    <color name="bg_color_clair">#8B143D42</color>
+    <color name="bg_color_gris_clair">#E4E4E4</color>
+    <color name="bg_color_gris_fonce">#494848</color>
+    <color name="colorGrisClair">#F6F6F6</color>
+
+
+    <!-- Status Colors-->
+    <color name="status_danger">#DA1A20</color>
+    <color name="status_warning">#FFEA00</color>
+    <color name="status_succes">#19D174</color>
+
+
+
+
 </resources>
