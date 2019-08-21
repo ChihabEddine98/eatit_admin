@@ -12,7 +12,7 @@
         <activity
             android:name=".controllers.Home"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".controllers.Login" />
         <activity android:name=".controllers.MainActivity">
             <intent-filter>
