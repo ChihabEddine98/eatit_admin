@@ -11,6 +11,8 @@
     <color name="bg_color_gris_clair">#E4E4E4</color>
     <color name="bg_color_gris_fonce">#494848</color>
     <color name="colorGrisClair">#F6F6F6</color>
+    <color name="white">#FFF</color>
+
 
 
     <!-- Status Colors-->

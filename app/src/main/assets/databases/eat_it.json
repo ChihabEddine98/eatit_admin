@@ -1,0 +1,197 @@
+{
+  "Category" : [ null, {
+    "imgUrl" : "https://image.jimcdn.com/app/cms/image/transf/none/path/secca54593ea018d2/image/ic95e5c1bf91ac555/version/1510146138/image.jpg",
+    "nom" : "Pizzas"
+  }, {
+    "imgUrl" : "https://u.tfstatic.com/restaurant_photos/053/450053/169/612/tacos-ben-plato-6d1f8.jpg",
+    "nom" : "Tacos"
+  }, {
+    "imgUrl" : "https://assets.afcdn.com/recipe/20160928/21224_w1024h768c1cx2128cy1416.jpg",
+    "nom" : "Sandwich"
+  }, {
+    "imgUrl" : "http://cuisinemoiunmouton.com/wp-content/uploads/2017/11/soupe-de-patate-douce-1-2.jpg",
+    "nom" : "Soupes"
+  }, {
+    "imgUrl" : "https://www.welovebuzz.com/wp-content/uploads/2015/01/couscous-marocain.jpg",
+    "nom" : "Traditionnel"
+  }, {
+    "imgUrl" : "https://assets.afcdn.com/recipe/20160310/44723_w1024h768c1cx2015cy1500.jpg",
+    "nom" : "Boissons"
+  }, {
+    "imgUrl" : "https://www.auxdelicesdupalais.net/wp-content/uploads/2017/05/DSC07908.jpg",
+    "nom" : "Gateaux"
+  } ],
+  "Food" : [ null, {
+    "categoryId" : "1",
+    "description" : "Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500",
+    "imgUrl" : "https://assets.afcdn.com/recipe/20170427/39421_w1024h768c1cx831cy571.jpg",
+    "nom" : "Végétarienne",
+    "prix" : "7.99",
+    "reduction" : "0"
+  }, {
+    "categoryId" : "1",
+    "description" : "On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même",
+    "imgUrl" : "https://beauharnois-salaberry.com/tourismebsv/wp-content/uploads/2016/05/mikes4-pizza-carnivore.jpg",
+    "nom" : "Carnivore",
+    "prix" : "11.99",
+    "reduction" : "0"
+  }, {
+    "categoryId" : "1",
+    "description" : "Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500",
+    "imgUrl" : "https://static.cuisineaz.com/400x320/i113492-pizza-napolitaine.jpg",
+    "nom" : "Napolitaine",
+    "prix" : "9.99",
+    "reduction" : "10"
+  }, {
+    "categoryId" : "1",
+    "description" : "Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard.",
+    "imgUrl" : "https://cac.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fcac.2F2018.2F09.2F25.2F13d543a6-cdf7-400e-9c5a-b274a8f22e5e.2Ejpeg/748x372/quality/80/crop-from/center/pizza-margherita.jpeg",
+    "nom" : "Marguérite",
+    "prix" : "10",
+    "reduction" : "20"
+  }, {
+    "categoryId" : "1",
+    "description" : "Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500",
+    "imgUrl" : "https://www.galbani.fr/wp-content/uploads/2017/07/pizza_maison.jpg",
+    "nom" : "Fait Maison",
+    "prix" : "16.99",
+    "reduction" : "20"
+  } ],
+  "FoodOrder" : {
+    "1566303311532" : {
+      "adresse" : "9 Rue de Verdun 91160",
+      "foods" : [ {
+        "foodId" : "1",
+        "foodName" : "Végétarienne",
+        "prix" : "7.99",
+        "qte" : "1",
+        "reduction" : "0"
+      }, {
+        "foodId" : "1",
+        "foodName" : "Végétarienne",
+        "prix" : "7.99",
+        "qte" : "2",
+        "reduction" : "0"
+      }, {
+        "foodId" : "2",
+        "foodName" : "Carnivore",
+        "prix" : "11.99",
+        "qte" : "1",
+        "reduction" : "0"
+      }, {
+        "foodId" : "5",
+        "foodName" : "Fait Maison",
+        "prix" : "16.99",
+        "qte" : "2",
+        "reduction" : "20"
+      } ],
+      "nom" : "Benamara Chihab eddine",
+      "phone" : "123",
+      "status" : "2",
+      "total" : "69.94"
+    },
+    "1566303369401" : {
+      "adresse" : "2 Rue Jb Pigalle 75009",
+      "foods" : [ {
+        "foodId" : "1",
+        "foodName" : "Végétarienne",
+        "prix" : "7.99",
+        "qte" : "4",
+        "reduction" : "0"
+      } ],
+      "nom" : "Benamara Chihab eddine",
+      "phone" : "123",
+      "status" : "1",
+      "total" : "31.96"
+    },
+    "1566303405634" : {
+      "adresse" : "9 Rue de Verdun 91160",
+      "foods" : [ {
+        "foodId" : "3",
+        "foodName" : "Napolitaine",
+        "prix" : "9.99",
+        "qte" : "2",
+        "reduction" : "10"
+      }, {
+        "foodId" : "5",
+        "foodName" : "Fait Maison",
+        "prix" : "16.99",
+        "qte" : "3",
+        "reduction" : "20"
+      } ],
+      "nom" : "Benamara Chihab eddine",
+      "phone" : "123",
+      "status" : "0",
+      "total" : "70.95"
+    },
+    "1566304599252" : {
+      "adresse" : " 2 Rue JB Pigalle 75013",
+      "foods" : [ {
+        "foodId" : "3",
+        "foodName" : "Napolitaine",
+        "prix" : "9.99",
+        "qte" : "1",
+        "reduction" : "10"
+      }, {
+        "foodId" : "2",
+        "foodName" : "Carnivore",
+        "prix" : "11.99",
+        "qte" : "3",
+        "reduction" : "0"
+      } ],
+      "nom" : "Benamara Chihab eddine",
+      "phone" : "123",
+      "status" : "3",
+      "total" : "45.96"
+    },
+    "1566311653534" : {
+      "adresse" : "9 rue de Verdun 91320",
+      "foods" : [ {
+        "foodId" : "5",
+        "foodName" : "Fait Maison",
+        "prix" : "16.99",
+        "qte" : "2",
+        "reduction" : "20"
+      }, {
+        "foodId" : "2",
+        "foodName" : "Carnivore",
+        "prix" : "11.99",
+        "qte" : "3",
+        "reduction" : "0"
+      }, {
+        "foodId" : "3",
+        "foodName" : "Napolitaine",
+        "prix" : "9.99",
+        "qte" : "1",
+        "reduction" : "10"
+      } ],
+      "nom" : "Benamara Chihab eddine",
+      "phone" : "123",
+      "status" : "0",
+      "total" : "79.94"
+    }
+  },
+  "User" : {
+    "123" : {
+      "dateDeNaissance" : "12/09/1998",
+      "mdp" : "123",
+      "nom" : "Benamara",
+      "prenom" : "Chihab Eddine",
+      "isStuff": "true"
+    },
+    "456" : {
+      "dateDeNaissance" : "06/10/2005",
+      "mdp" : "123",
+      "nom" : "Benamara",
+      "prenom" : "Med Amine",
+      "isStuff": "false"
+    },
+    "789" : {
+      "dateDeNaissance" : "15/06/1971",
+      "mdp" : "123",
+      "nom" : "Bourada",
+      "prenom" : "Amina",
+      "isStuff": "false"
+    }
+  }
+}
