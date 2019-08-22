@@ -24,7 +24,6 @@ import android.widget.Toast;
 import com.chihab_eddine98.eatit_admin.R;
 import com.chihab_eddine98.eatit_admin.common.Common;
 import com.chihab_eddine98.eatit_admin.interfaces.ItemClickListener;
-import com.chihab_eddine98.eatit_admin.model.Category;
 import com.chihab_eddine98.eatit_admin.model.Food;
 import com.chihab_eddine98.eatit_admin.viewHolder.FoodVH;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -321,7 +320,7 @@ public class FoodList extends AppCompatActivity {
         }
         else if (item.getTitle().equals(Common.DELETE))
         {
-            showDeleteCategoryDialog(adapter.getRef(item.getOrder()).getKey());
+            showDeleteFoodDialog(adapter.getRef(item.getOrder()).getKey());
         }
 
 
@@ -332,7 +331,7 @@ public class FoodList extends AppCompatActivity {
     {
 
         AlertDialog.Builder dialog=new AlertDialog.Builder(FoodList.this);
-        dialog.setTitle(" Ajouter un nouveau produit");
+        dialog.setTitle(" Modifier un produit");
 //        dialog.setMessage(" Remplissez tout les champs svp");
         dialog.setIcon(R.drawable.ic_restaurant_black_24dp);
 
@@ -454,12 +453,12 @@ public class FoodList extends AppCompatActivity {
     }
 
     // Delete Catégo
-    private void showDeleteCategoryDialog(final String key)
+    private void showDeleteFoodDialog(final String key)
     {
 
         AlertDialog.Builder dialog=new AlertDialog.Builder(FoodList.this);
-        dialog.setTitle(" Supprimer une catégorie");
-        dialog.setMessage(" Etes vous sur de vouloir supprimer cette catégorie ?");
+        dialog.setTitle(" Supprimer un produit");
+        dialog.setMessage(" Etes vous sur de vouloir supprimer ce produit ?");
         dialog.setIcon(R.drawable.ic_menu_manage);
 
 
@@ -473,7 +472,7 @@ public class FoodList extends AppCompatActivity {
                 dialogInterface.dismiss();
 
                 table_food.child(key).removeValue();
-                Snackbar.make(recycler_food,"Menu Supprimé avec succès ",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(recycler_food,"Produit Supprimé avec succès ",Snackbar.LENGTH_SHORT).show();
 
             }
         });
