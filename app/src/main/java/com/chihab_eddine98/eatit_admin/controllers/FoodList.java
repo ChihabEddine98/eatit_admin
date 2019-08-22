@@ -15,12 +15,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.chihab_eddine98.eatit_admin.R;
+import com.chihab_eddine98.eatit_admin.common.Common;
 import com.chihab_eddine98.eatit_admin.interfaces.ItemClickListener;
 import com.chihab_eddine98.eatit_admin.model.Category;
 import com.chihab_eddine98.eatit_admin.model.Food;
@@ -244,6 +246,14 @@ public class FoodList extends AppCompatActivity {
 
     }
 
+    private void chooseImg() {
+
+        Intent intent=new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Selectionner une image"),PICK_IMAGE_REQUEST);
+    }
+
     private void uploadImg() {
 
         final ProgressDialog dialog=new ProgressDialog(this);
@@ -301,6 +311,187 @@ public class FoodList extends AppCompatActivity {
         });
     }
 
+    // Update && Delete Food
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if (item.getTitle().equals(Common.UPDATE))
+        {
+            showUpdateFoodDialog(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
+        }
+        else if (item.getTitle().equals(Common.DELETE))
+        {
+            showDeleteCategoryDialog(adapter.getRef(item.getOrder()).getKey());
+        }
+
+
+        return super.onContextItemSelected(item);
+    }
+
+    private void showUpdateFoodDialog(final String key, final Food food)
+    {
+
+        AlertDialog.Builder dialog=new AlertDialog.Builder(FoodList.this);
+        dialog.setTitle(" Ajouter un nouveau produit");
+//        dialog.setMessage(" Remplissez tout les champs svp");
+        dialog.setIcon(R.drawable.ic_restaurant_black_24dp);
+
+
+        LayoutInflater inflater=this.getLayoutInflater();
+        View add_food_layout=inflater.inflate(R.layout.update_food_form,null);
+        dialog.setView(add_food_layout);
+
+        edtNomFood=add_food_layout.findViewById(R.id.edtNomFood);
+        edtDescFood=add_food_layout.findViewById(R.id.edtDescFood);
+        edtPrixFood=add_food_layout.findViewById(R.id.edtPrixFood);
+        edtReductionFood=add_food_layout.findViewById(R.id.edtReductionFood);
+        btnSelect=add_food_layout.findViewById(R.id.btnSelect);
+        btnUpload=add_food_layout.findViewById(R.id.btnUpload);
+
+        edtNomFood.setText(food.getNom());
+        edtDescFood.setText(food.getDescription());
+        edtPrixFood.setText(food.getPrix());
+        edtReductionFood.setText(food.getReduction());
+
+
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseImg();
+            }
+        });
+
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                changeImgFood(food);
+
+            }
+        });
+
+        dialog.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+
+                food.setNom(edtNomFood.getText().toString());
+                food.setDescription(edtDescFood.getText().toString());
+                food.setPrix(edtPrixFood.getText().toString());
+                food.setReduction(edtReductionFood.getText().toString());
+
+
+                table_food.child(key).setValue(food);
+                Snackbar.make(recycler_food,"Produit modifié avec succès ",Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+
+            }
+        });
+
+
+
+        dialog.show();
+
+    }
+
+    private void changeImgFood(final Food food)  {
+
+        final ProgressDialog dialog=new ProgressDialog(this);
+        dialog.setMessage("Téléchargement...");
+        dialog.show();
+
+        String nomImg= UUID.randomUUID().toString();
+
+        final StorageReference imgFichier=storageReference.child("images/"+nomImg);
+        imgFichier.putFile(saveUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                dialog.dismiss();
+                Toast.makeText(FoodList.this," Téléchargement terminé avec succès ",Toast.LENGTH_SHORT).show();
+                imgFichier.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        // Si le upload est bien passé et on a bien un lien pour telecharger la photo apres
+                        food.setImgUrl(uri.toString());
+                    }
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                dialog.dismiss();
+
+                Toast.makeText(FoodList.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+
+
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                // Progress pourcent (transféré/total)*100
+                double taux=100*(taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+
+                dialog.setMessage(taux+"%"+" téléchrgés");
+
+
+
+
+            }
+        });
+    }
+
+    // Delete Catégo
+    private void showDeleteCategoryDialog(final String key)
+    {
+
+        AlertDialog.Builder dialog=new AlertDialog.Builder(FoodList.this);
+        dialog.setTitle(" Supprimer une catégorie");
+        dialog.setMessage(" Etes vous sur de vouloir supprimer cette catégorie ?");
+        dialog.setIcon(R.drawable.ic_menu_manage);
+
+
+
+
+
+        dialog.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+
+                table_food.child(key).removeValue();
+                Snackbar.make(recycler_food,"Menu Supprimé avec succès ",Snackbar.LENGTH_SHORT).show();
+
+            }
+        });
+
+        dialog.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+
+            }
+        });
+
+
+
+        dialog.show();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -314,13 +505,6 @@ public class FoodList extends AppCompatActivity {
 
     }
 
-    private void chooseImg() {
-
-        Intent intent=new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Selectionner une image"),PICK_IMAGE_REQUEST);
-    }
 
     // Search Méthodes
     private void startSearch(CharSequence text) {

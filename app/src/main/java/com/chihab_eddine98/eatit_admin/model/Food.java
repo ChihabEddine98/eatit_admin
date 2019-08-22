@@ -48,4 +48,29 @@ public class Food {
     public String getCategoryId() {
         return categoryId;
     }
+
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrix(String prix) {
+        this.prix = prix;
+    }
+
+    public void setReduction(String reduction) {
+        this.reduction = reduction;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
 }
