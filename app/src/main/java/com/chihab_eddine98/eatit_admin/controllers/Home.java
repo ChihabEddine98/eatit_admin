@@ -276,6 +276,10 @@ public class Home extends AppCompatActivity
         {
             showUpdateCategoryDialog(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
         }
+        else if (item.getTitle().equals(Common.DELETE))
+        {
+            showDeleteCategoryDialog(adapter.getRef(item.getOrder()).getKey());
+        }
 
 
         return super.onContextItemSelected(item);
@@ -324,6 +328,8 @@ public class Home extends AppCompatActivity
 
                 catego.setNom(edtNomCatego.getText().toString());
                 table_category.child(key).setValue(catego);
+                Snackbar.make(drawer,"Menu modifié avec succès ",Snackbar.LENGTH_SHORT).show();
+
             }
         });
 
@@ -392,6 +398,45 @@ public class Home extends AppCompatActivity
 
             }
         });
+    }
+
+    // Delete Catégo
+    private void showDeleteCategoryDialog(final String key)
+    {
+
+        AlertDialog.Builder dialog=new AlertDialog.Builder(Home.this);
+        dialog.setTitle(" Supprimer une catégorie");
+        dialog.setMessage(" Etes vous sur de vouloir supprimer cette catégorie ?");
+        dialog.setIcon(R.drawable.ic_menu_manage);
+
+
+
+
+
+        dialog.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+
+                table_category.child(key).removeValue();
+                Snackbar.make(drawer,"Menu Supprimé avec succès ",Snackbar.LENGTH_SHORT).show();
+
+            }
+        });
+
+        dialog.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+
+            }
+        });
+
+
+
+        dialog.show();
     }
 
     // Init view (menus)
