@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="4dp"
-
+    android:scrollbars="vertical"
     >
 
 
@@ -12,25 +12,79 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         >
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtNomCatego"
+            android:id="@+id/edtNomFood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:hint="Nom De Catégorie"
+            android:hint="Nom du Produit"
             app:met_textColorHint="@color/bg_color_gris_fonce"
             app:met_textColor="@color/bg_color_gris_fonce"
             app:met_underlineColor="@color/bg_color_gris_fonce"
             app:met_floatingLabelTextColor="@color/bg_color_gris_fonce"
-            android:textSize="30sp"
+            android:textSize="18sp"
             android:text=""
             android:inputType="text"
             app:met_baseColor="@color/bg_color_gris_fonce"
             app:met_floatingLabel="highlight"
-            app:met_maxCharacters="10"
+            app:met_maxCharacters="25"
+            app:met_primaryColor="@color/bg_color_gris_fonce"
+            app:met_singleLineEllipsis="true"
+            />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtDescFood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Description"
+            app:met_textColorHint="@color/bg_color_gris_fonce"
+            app:met_textColor="@color/bg_color_gris_fonce"
+            app:met_underlineColor="@color/bg_color_gris_fonce"
+            app:met_floatingLabelTextColor="@color/bg_color_gris_fonce"
+            android:textSize="18sp"
+            android:text=""
+            android:inputType="text"
+            app:met_baseColor="@color/bg_color_gris_fonce"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/bg_color_gris_fonce"
+            app:met_singleLineEllipsis="true"
+            />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtPrixFood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Prix"
+            app:met_textColorHint="@color/bg_color_gris_fonce"
+            app:met_textColor="@color/bg_color_gris_fonce"
+            app:met_underlineColor="@color/bg_color_gris_fonce"
+            app:met_floatingLabelTextColor="@color/bg_color_gris_fonce"
+            android:textSize="18sp"
+            android:text=""
+            android:inputType="text"
+            app:met_baseColor="@color/bg_color_gris_fonce"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/bg_color_gris_fonce"
+            app:met_singleLineEllipsis="true"
+            />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtReductionFood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Réduction"
+            app:met_textColorHint="@color/bg_color_gris_fonce"
+            app:met_textColor="@color/bg_color_gris_fonce"
+            app:met_underlineColor="@color/bg_color_gris_fonce"
+            app:met_floatingLabelTextColor="@color/bg_color_gris_fonce"
+            android:textSize="18sp"
+            android:text=""
+            android:inputType="text"
+            app:met_baseColor="@color/bg_color_gris_fonce"
+            app:met_floatingLabel="highlight"
             app:met_primaryColor="@color/bg_color_gris_fonce"
             app:met_singleLineEllipsis="true"
             />
@@ -38,9 +92,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Image"
+            android:text="Image du produit"
             android:textColor="@color/bg_color_gris_fonce"
-            android:textSize="24sp"/>
+            android:textSize="18sp"/>
+
 
         <LinearLayout
             android:orientation="horizontal"
