@@ -1,5 +1,6 @@
 package com.chihab_eddine98.eatit_admin.controllers;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,12 +12,15 @@ import com.chihab_eddine98.eatit_admin.interfaces.ItemClickListener;
 import com.chihab_eddine98.eatit_admin.model.Category;
 import com.chihab_eddine98.eatit_admin.viewHolder.CategoryVH;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
@@ -28,7 +32,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -42,6 +48,9 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.UUID;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,7 +77,7 @@ public class Home extends AppCompatActivity
     // New Data
     Category newCatego;
     Uri saveUri;
-    private final int PICK_IMAGE_REQUEST=71;
+    private final int PICK_IMAGE_REQUEST=1;
 
 
     @Override
@@ -152,6 +161,7 @@ public class Home extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
+                uploadImg();
             }
         });
 
@@ -159,12 +169,19 @@ public class Home extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
+                dialogInterface.dismiss();
+                if(newCatego!=null)
+                {
+                    table_category.push().setValue(newCatego);
+                }
             }
         });
 
         dialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
 
             }
         });
@@ -175,16 +192,70 @@ public class Home extends AppCompatActivity
 
     }
 
+    private void uploadImg() {
+
+        final ProgressDialog dialog=new ProgressDialog(this);
+        dialog.setMessage("Téléchargement...");
+        dialog.show();
+
+        String nomImg= UUID.randomUUID().toString();
+
+        final StorageReference imgFichier=storageReference.child("images/"+nomImg);
+        imgFichier.putFile(saveUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                dialog.dismiss();
+                Toast.makeText(Home.this," Téléchargement terminé avec succès ",Toast.LENGTH_SHORT).show();
+                imgFichier.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        // Si le upload est bien passé et on a bien un lien pour telecharger la photo apres
+                        newCatego=new Category(edtNomCatego.getText().toString(),uri.toString());
+
+
+
+                    }
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                dialog.dismiss();
+
+                Toast.makeText(Home.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+
+
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+             // Progress pourcent (transféré/total)*100
+             double taux=100*(taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+
+             dialog.setMessage(taux+"%"+" téléchrgés");
+
+
+
+
+            }
+        });
+    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==PICK_IMAGE_REQUEST && requestCode==RESULT_OK
+        if(requestCode==PICK_IMAGE_REQUEST && resultCode==RESULT_OK
             && data!=null && data.getData()!=null )
         {
             saveUri=data.getData();
-            btnSelect.setText(" Image Selectionnée");
+            btnSelect.setText("Selectionnée");
         }
 
     }
@@ -192,7 +263,7 @@ public class Home extends AppCompatActivity
     private void chooseImg() {
 
         Intent intent=new Intent();
-        intent.setType("images/*");
+        intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Selectionner une image"),PICK_IMAGE_REQUEST);
     }
