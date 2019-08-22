@@ -531,8 +531,8 @@ public class Home extends AppCompatActivity
 
         } else if (id == R.id.nav_orders) {
 
-//            Intent mesCommandesIntent=new Intent(Home.this,MesCommandes.class);
-//            startActivity(mesCommandesIntent);
+            Intent commandes=new Intent(Home.this,Commandes.class);
+            startActivity(commandes);
 
         } else if (id == R.id.nav_settings) {
 

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:layout_marginBottom="3dp"
+    android:elevation="4dp"
+    android:padding="16dp"
+    app:cardCornerRadius="10dp"
+    android:backgroundTint="@color/colorGrisClair">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+
+        <LinearLayout
+            android:layout_weight="9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            >
+
+
+            <TextView
+                android:id="@+id/order_item_id"
+                android:layout_gravity="center_vertical|start"
+                android:text="#Order_ID"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"/>
+
+            <LinearLayout
+                android:id="@+id/status_layout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_color_gris_clair"
+                >
+
+                <TextView
+                    android:id="@+id/order_item_status"
+                    android:layout_gravity="center_vertical|start"
+                    android:text="Status"
+                    android:textColor="@color/status_danger"
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+                
+                <ImageView
+                    android:id="@+id/order_item_status_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_battery_20_black_24dp"
+                    android:rotation="15"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/order_item_nomComplet"
+                android:layout_gravity="center_vertical|start"
+                android:text="Nom Prénoms"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/order_item_phone"
+                android:layout_gravity="center_vertical|start"
+                android:text="0774873689"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/order_item_adresse"
+                android:layout_gravity="center_vertical|start"
+                android:text="2 Rue Université 75013"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"/>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/cart_item_qte"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginRight="16dp"/>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
