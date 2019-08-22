@@ -65,7 +65,7 @@ public class Home extends AppCompatActivity
     EditText edtNomCatego; // popup
     Button btnSelect,btnUpload;
 
-
+    DrawerLayout drawer;
 
     //Recycler View
     RecyclerView recycler_category;
@@ -96,7 +96,7 @@ public class Home extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -132,6 +132,7 @@ public class Home extends AppCompatActivity
     }
 
     // Own Code
+    // Add Catgory
     private void showAddCategoryDialog() {
 
         AlertDialog.Builder dialog=new AlertDialog.Builder(Home.this);
@@ -173,6 +174,7 @@ public class Home extends AppCompatActivity
                 if(newCatego!=null)
                 {
                     table_category.push().setValue(newCatego);
+                    Snackbar.make(drawer," Nouveau Menu : "+newCatego.getNom(),Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -245,8 +247,6 @@ public class Home extends AppCompatActivity
         });
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -267,6 +267,134 @@ public class Home extends AppCompatActivity
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Selectionner une image"),PICK_IMAGE_REQUEST);
     }
+
+    // Update && Delete Category
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if (item.getTitle().equals(Common.UPDATE))
+        {
+            showUpdateCategoryDialog(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
+        }
+
+
+        return super.onContextItemSelected(item);
+    }
+
+    private void showUpdateCategoryDialog(final String key, final Category catego)
+    {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(Home.this);
+        dialog.setTitle(" Modifier une catégorie");
+        dialog.setMessage(" Remplissez tout les champs svp");
+        dialog.setIcon(R.drawable.ic_restaurant_black_24dp);
+
+
+
+        LayoutInflater inflater=this.getLayoutInflater();
+        View add_catego_layout=inflater.inflate(R.layout.activity_add_category,null);
+        dialog.setView(add_catego_layout);
+
+        edtNomCatego=add_catego_layout.findViewById(R.id.edtNomCatego);
+        btnSelect=add_catego_layout.findViewById(R.id.btnSelect);
+        btnUpload=add_catego_layout.findViewById(R.id.btnUpload);
+
+        edtNomCatego.setText(catego.getNom());
+
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseImg();
+            }
+        });
+
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                changeImgCatego(catego);
+            }
+        });
+
+        dialog.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+
+                catego.setNom(edtNomCatego.getText().toString());
+                table_category.child(key).setValue(catego);
+            }
+        });
+
+        dialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+
+            }
+        });
+
+
+
+        dialog.show();
+    }
+
+    private void changeImgCatego(final Category catego)  {
+
+        final ProgressDialog dialog=new ProgressDialog(this);
+        dialog.setMessage("Téléchargement...");
+        dialog.show();
+
+        String nomImg= UUID.randomUUID().toString();
+
+        final StorageReference imgFichier=storageReference.child("images/"+nomImg);
+        imgFichier.putFile(saveUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                dialog.dismiss();
+                Toast.makeText(Home.this," Téléchargement terminé avec succès ",Toast.LENGTH_SHORT).show();
+                imgFichier.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        // Si le upload est bien passé et on a bien un lien pour telecharger la photo apres
+                        catego.setImgUrl(uri.toString());
+
+
+
+                    }
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                dialog.dismiss();
+
+                Toast.makeText(Home.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+
+
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                // Progress pourcent (transféré/total)*100
+                double taux=100*(taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+
+                dialog.setMessage(taux+"%"+" téléchrgés");
+
+
+
+
+            }
+        });
+    }
+
+    // Init view (menus)
 
     private void loadCategories() {
 

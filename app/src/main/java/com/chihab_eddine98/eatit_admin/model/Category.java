@@ -23,4 +23,12 @@ public class Category {
     public String getImgUrl() {
         return imgUrl;
     }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 }

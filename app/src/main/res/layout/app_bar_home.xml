@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controllers.Home">
+    tools:context=".controllers.Home"
+    android:background="@drawable/bg2">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -28,8 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="@color/bg_color_gris_clair"
-        app:srcCompat="@drawable/ic_menu_manage"
+        android:backgroundTint="@color/status_succes"
+        app:srcCompat="@drawable/ic_playlist_add_black_24dp"
+        app:fabSize="normal"
         tools:ignore="VectorDrawableCompat" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
