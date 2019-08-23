@@ -25,6 +25,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -32,11 +33,13 @@ dependencies {
     // own libraries
 
     implementation 'com.google.firebase:firebase-analytics:17.0.1'
-    // Firebase
+    // Google
     implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.firebase:firebase-database:17.0.0'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-storage:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:+' // Map
+    implementation 'com.google.android.gms:play-services-location:+'
 
 
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
@@ -51,6 +54,8 @@ dependencies {
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     implementation 'com.github.mancj:MaterialSearchBar:0.8.2'
     implementation 'com.jaredrummler:material-spinner:1.1.0'
+    implementation 'com.android.support:design:+'
+    implementation 'junit:junit:4.12'
 
 }
 apply plugin: 'com.google.gms.google-services'
