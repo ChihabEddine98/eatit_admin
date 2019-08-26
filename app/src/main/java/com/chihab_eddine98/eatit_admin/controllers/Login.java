@@ -68,7 +68,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private void loginUser(final String phone, String mdp) {
+    private void loginUser(String phone, String mdp) {
 
         final ProgressDialog dialog=new ProgressDialog(Login.this);
         dialog.setMessage("Vérification...");
