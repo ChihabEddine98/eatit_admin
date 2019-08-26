@@ -17,21 +17,21 @@
 
 
 
-        <TextView
-            android:id="@+id/txtOrderId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="#OrderID"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            />
+        <!--<TextView-->
+            <!--android:id="@+id/txtOrderId"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="#OrderID"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="20sp"-->
+            <!--/>-->
 
         <com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/statusSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@android:color/black"/>
 
 
 

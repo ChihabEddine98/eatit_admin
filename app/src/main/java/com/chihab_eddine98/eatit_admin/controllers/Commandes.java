@@ -102,8 +102,8 @@ public class Commandes extends AppCompatActivity {
         statusSpinner.setItems("En préparation","En route","Livrée","Rembourssement");
         statusSpinner.setSelectedIndex(Integer.parseInt(order.getStatus()));
 
-        txtOrderId=update.findViewById(R.id.txtOrderId);
-        txtOrderId.setText("#"+key);
+//        txtOrderId=update.findViewById(R.id.txtOrderId);
+//        txtOrderId.setText("#"+key);
 
 
 

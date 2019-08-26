@@ -10,6 +10,7 @@ import com.chihab_eddine98.eatit_admin.R;
 import com.chihab_eddine98.eatit_admin.common.Common;
 import com.chihab_eddine98.eatit_admin.interfaces.ItemClickListener;
 import com.chihab_eddine98.eatit_admin.model.Category;
+import com.chihab_eddine98.eatit_admin.services.ListenOrder;
 import com.chihab_eddine98.eatit_admin.viewHolder.CategoryVH;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,8 +30,12 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -129,6 +134,12 @@ public class Home extends AppCompatActivity
 
 
         loadCategories();
+
+        // Start Services
+
+        Intent listenOrderService=new Intent(Home.this, ListenOrder.class);
+
+        startService(listenOrderService);
     }
 
     // Own Code
@@ -418,6 +429,25 @@ public class Home extends AppCompatActivity
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 dialogInterface.dismiss();
+                // Delete all foods belongs to this category
+                DatabaseReference table_food=bdd.getReference("Food");
+                Query foodOfCatgo=table_food.orderByChild("categoryId").equalTo(key);
+
+                foodOfCatgo.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        for(DataSnapshot data:dataSnapshot.getChildren())
+                        {
+                            data.getRef().removeValue();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
                 table_category.child(key).removeValue();
                 Snackbar.make(drawer,"Menu Supprimé avec succès ",Snackbar.LENGTH_SHORT).show();
