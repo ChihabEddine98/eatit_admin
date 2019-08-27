@@ -144,7 +144,7 @@ public class TrackOrder extends FragmentActivity
     // et nous montre aussi la route ( directions )
     private void drawTrackOrder(final LatLng urLocation, final String orderAdresse)
     {
-        String k="AIzaSyBdt7ULkf0VFi3dMwBETPLypun5r6WbyvY";
+        String k="YOUR_API_KEY_HERE";
         mService.getGeoCode(orderAdresse,k).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -184,7 +184,8 @@ public class TrackOrder extends FragmentActivity
 
                     // Ajouter la direction
 
-                    String k="AIzaSyBdt7ULkf0VFi3dMwBETPLypun5r6WbyvY";
+                    String k="YOUR_API_KEY_HERE";
+
 
                     mService.getDirections(urLocation.latitude+","+urLocation.longitude,
                                             orderLocation.latitude+","+orderLocation.longitude,
